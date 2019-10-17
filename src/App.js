@@ -3,18 +3,9 @@ import './App.css';
 import Form from './components/Form';
 import TeamMembers from './components/TeamMembers';
 
-var data = [
-  {
-    id: 1,
-    name: "Bob",
-    email: "bob@gmail.com",
-    role: "React Developer"
-  }
-];
-
 
 function App() {
-  const [teamList, setTeamList] = useState(data);
+  const [teamList, setTeamList] = useState([]);
   const [memberToEdit, setMemberToEdit] = useState("");
 
   const addTeamMember = person => {

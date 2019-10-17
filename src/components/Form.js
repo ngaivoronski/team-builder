@@ -15,6 +15,8 @@ const Form = props => {
         role: "",
     });
 
+    const [buttonPrompt, setButtonPrompt] = useState("Add Team Member");
+
     const changeHandler = event => {
         setTeamMember({...teamMember, [event.target.name]: event.target.value })
     };
@@ -34,7 +36,10 @@ const Form = props => {
     useEffect(() => {
         if (props.memberToEdit !== "") {
             setTeamMember(props.memberToEdit)
-        }  
+            setButtonPrompt("Edit Team Member");
+        } else {
+            setButtonPrompt("Add Team Member");
+        }
     },[props.memberToEdit])
 
     return(
@@ -48,7 +53,7 @@ const Form = props => {
             <label htmlFor="role">Team Member Role:</label>
             <textarea name="role" id="role" type="text" placeholder="Role" value={teamMember.role} onChange={changeHandler} />
 
-            <button type="submit">Add Team Member</button>
+            <button type="submit">{buttonPrompt}</button>
         </TeamForm>
     )
 }
