@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 const TeamForm = styled.form`
@@ -21,10 +21,21 @@ const Form = props => {
 
     const submitForm = event => {
         event.preventDefault();
-        props.addTeamMember(teamMember);
-        setTeamMember({name: "", email: "", role: ""});
+        if (props.memberToEdit !== "") {
+            props.editTeamMember(teamMember);
+            setTeamMember({name: "", email: "", role: ""});
+            props.setMemberToEdit("");
+        } else {
+            props.addTeamMember(teamMember);
+            setTeamMember({name: "", email: "", role: ""});
+        }
     }
 
+    useEffect(() => {
+        if (props.memberToEdit !== "") {
+            setTeamMember(props.memberToEdit)
+        }  
+    },[props.memberToEdit])
 
     return(
         <TeamForm onSubmit={submitForm}>
